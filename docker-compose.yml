@@ -9,7 +9,7 @@ services:
     networks:
       - da_net
     volumes:
-      - php:wordpress/index.php
+      - "wordpress_v:/var/www"
   
   mariadb:
     build: mariadb
@@ -23,7 +23,7 @@ services:
     networks:
       - da_net
     volumes:
-      - php:wordpress/index.php
+      - "wordpress_v:/var/www"
 
 networks:
   da_net:
@@ -31,4 +31,4 @@ networks:
     name: da_net
 
 volumes:
-  php:
+  wordpress_v:
