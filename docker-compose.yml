@@ -8,6 +8,8 @@ services:
     container_name: nginx_c
     networks:
       - da_net
+    volumes:
+      - php:wordpress/index.php
   
   mariadb:
     build: mariadb
@@ -20,8 +22,13 @@ services:
     container_name: wordpress_c
     networks:
       - da_net
+    volumes:
+      - php:wordpress/index.php
 
 networks:
   da_net:
     external: false
     name: da_net
+
+volumes:
+  php:
