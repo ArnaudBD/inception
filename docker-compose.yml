@@ -17,6 +17,8 @@ services:
     container_name: maria_debe
     networks:
       - da_net
+    # volumes:
+    #   - "./mariadb/script.sql:/docker-entrypoint-initdb.d/wp.sql"
     # environment:
     #   - MYSQL_ROOT_PASSWORD=chut
     #   - MYSQL_DATABASE=mysql
