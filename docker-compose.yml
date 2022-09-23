@@ -2,15 +2,6 @@ version: '3.5'
 
 
 services:
-  nginx:
-    build: nginx
-    ports:
-      - "8080:80"
-    container_name: nginx_c
-    networks:
-      - da_net
-    volumes:
-      - "wordpress_v:/var/www"
   
   mariadb:
     build: mariadb
@@ -24,6 +15,15 @@ services:
     #   - MYSQL_DATABASE=mysql
     #   - MYSQL_USER=mysql
     #   - MYSQL_PASSWORD=chut
+  nginx:
+    build: nginx
+    ports:
+      - "8080:80"
+    container_name: nginx_c
+    networks:
+      - da_net
+    volumes:
+      - "wordpress_v:/var/www"
 
   wordpress:
     build: wordpress
@@ -44,4 +44,4 @@ volumes:
     driver_opts:                                                             
       type: none                                                           
       o: bind          
-      device: /goinfre/abiju-du/docker/volumes/inception_wordpress_v/_data          
+      device: /goinfre/abiju-du/docker/volumes/inception_wordpress_v/_data # <-- create this directory in host
