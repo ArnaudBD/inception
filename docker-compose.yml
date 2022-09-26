@@ -17,6 +17,8 @@ services:
     #   - MYSQL_PASSWORD=chut
   nginx:
     build: nginx
+    depends_on:
+      - wordpress
     ports:
       - "8080:80"
     container_name: nginx_c
@@ -27,6 +29,8 @@ services:
 
   wordpress:
     build: wordpress
+    depends_on:
+      - mariadb
     container_name: wordpress_c
     networks:
       - da_net

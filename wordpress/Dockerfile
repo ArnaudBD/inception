@@ -7,10 +7,16 @@ RUN ln -sf /dev/stdout /var/log/php7.4-fpm.log
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
 RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 RUN wp core download --path=/var/www/wordpress --allow-root
-# RUN cd /var/www/wordpress && wp config create --dbuser=abd --dbpass=chut --dbhost=maria_debe --dbname=wordpress --allow-root
+COPY script.sh .
+RUN chmod +x script.sh
 
 COPY default /etc/php/7.4/fpm/pool.d/www.conf
-ENTRYPOINT [ "php-fpm7.4" ]
-CMD ["-F", "-R"]
+# ENTRYPOINT [ "php-fpm7.4" ]
+ENTRYPOINT [ "./script.sh" ]
+# CMD ["-F", "-R"]
+# CMD [ "cd", "/var/www/wordpress", "&&", "wp", "config", "create", "--dbuser=abd", "--dbpass=chut", "--dbhost=maria_debe", "--dbname=wordpress", "--allow-root" ]
+# CMD && cd /var/www/wordpress
+# CMD && wp config create --dbuser=abd --dbpass=chut --dbhost=maria_debe --dbname=wordpress --allow-root
+
 
 # VOLUME [ "index.php" ]
