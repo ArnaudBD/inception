@@ -20,7 +20,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "8080:80"
+      - "80:80"
     container_name: nginx_c
     networks:
       - da_net
@@ -48,4 +48,4 @@ volumes:
     driver_opts:                                                             
       type: none                                                           
       o: bind          
-      device: /goinfre/abiju-du/docker/volumes/inception_wordpress_v/_data # <-- create this directory in host
+      device: /var/lib/docker/volumes/inception_wordpress_v/_data # <-- create this directory in host and modify hosts file
