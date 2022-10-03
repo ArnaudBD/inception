@@ -8,6 +8,8 @@ services:
     container_name: maria_debe
     networks:
       - da_net
+    volumes:
+      - "mariadb_v:/var/lib/mysql"
     # volumes:
     #   - "./mariadb/script.sql:/docker-entrypoint-initdb.d/wp.sql"
     # environment:
@@ -48,4 +50,10 @@ volumes:
     driver_opts:                                                             
       type: none                                                           
       o: bind          
-      device: /var/lib/docker/volumes/inception_wordpress_v/_data # <-- create this directory in host and modify hosts file
+      device: /home/abiju-du/data/files # <-- create this directory in host and modify hosts file
+  mariadb_v:
+    driver: local                                                            
+    driver_opts:                                                             
+      type: none                                                           
+      o: bind          
+      device: /home/abiju-du/data/dump # <-- create this directory in host and modify hosts file
