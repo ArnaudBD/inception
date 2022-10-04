@@ -22,7 +22,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "80:80"
+      - "443:443"
     container_name: nginx_c
     networks:
       - da_net
