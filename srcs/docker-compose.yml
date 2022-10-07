@@ -5,39 +5,46 @@ services:
   
   mariadb:
     build: mariadb
+    image: mariadb
     container_name: maria_debe
     networks:
       - da_net
     volumes:
       - "mariadb_v:/var/lib/mysql"
-    # volumes:
-    #   - "./mariadb/script.sql:/docker-entrypoint-initdb.d/wp.sql"
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=chut
-    #   - MYSQL_DATABASE=mysql
-    #   - MYSQL_USER=mysql
-    #   - MYSQL_PASSWORD=chut
+    restart: always
+    env_file:
+      - .env
+
   nginx:
     build: nginx
     depends_on:
       - wordpress
     ports:
       - "443:443"
+    image: nginx
     container_name: nginx_c
     networks:
       - da_net
     volumes:
       - "wordpress_v:/var/www"
+    restart: always
+    env_file:
+      - .env
+
 
   wordpress:
     build: wordpress
     depends_on:
       - mariadb
+    image: wordpress
     container_name: wordpress_c
     networks:
       - da_net
     volumes:
       - "wordpress_v:/var/www"
+    restart: always
+    env_file:
+      - .env
 
 networks:
   da_net:
@@ -50,10 +57,10 @@ volumes:
     driver_opts:                                                             
       type: none                                                           
       o: bind          
-      device: /home/abiju-du/data/files # <-- create this directory in host and modify hosts file
+      device: /home/abiju-du/data/files
   mariadb_v:
     driver: local                                                            
     driver_opts:                                                             
       type: none                                                           
       o: bind          
-      device: /home/abiju-du/data/dump # <-- create this directory in host and modify hosts file
+      device: /home/abiju-du/data/dump
